@@ -86,9 +86,9 @@ export default function Home() {
                   "DFI", // Defensa Izquierdo
                   "LD",  // Lateral Derecho
                   "LI",  // Lateral Izquierdo
-                  "PIV", // Pivote Defensivo
                   "MCI", // Mediocentro Izquierdo
                   "MCD", // Mediocentro Derecho
+                  "MCO", // Mediocentro Ofensivo
                   "ED",  // Extremo Derecho
                   "EI",  // Extremo Izquierdo
                   "DC",  // Delantero Centro
