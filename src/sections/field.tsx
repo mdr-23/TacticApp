@@ -4,7 +4,7 @@ import { useGetPlayersQuery } from "@/redux/playersApi";
 import { Box, Typography, Stack, Link } from "@mui/material";
 import { useState } from "react";
 
-type PositionKey = "POR" | "DFD" | "DFI" | "LD" | "LI" | "PIV" | "MCI" | "MCD" | "ED" | "EI" | "DC";
+type PositionKey = "POR" | "DFD" | "DFI" | "LD" | "LI" | "MCO" | "MCI" | "MCD" | "ED" | "EI" | "DC";
 
 const positionColors: Record<PositionKey, string> = {
   POR: "#d09900",
@@ -17,7 +17,7 @@ const positionColors: Record<PositionKey, string> = {
   ED: "#2036b0",
   EI: "#2036b0",
   DC: "#2036b0",
-  PIV: "#2036b0",
+  MCO: "#2036b0",
 };
 
 
@@ -27,9 +27,9 @@ const initialPositions: Record<PositionKey, { x: number; y: number }> = {
     DFI: { x: 250, y: 250 },
     LD: { x: 250, y: 560 },
     LI: { x: 250, y: 105 },
-    PIV: { x: 400, y: 333 },
-    MCI: { x: 530, y: 203 },
-    MCD: { x: 530, y: 463 },
+    MCO: { x: 650, y: 333 },
+    MCI: { x: 400, y: 203 },
+    MCD: { x: 400, y: 463 },
     ED: { x: 770, y: 560 },
     EI: { x: 770, y: 105 },
     DC: { x: 933, y: 333 },
