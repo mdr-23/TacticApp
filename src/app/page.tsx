@@ -53,7 +53,7 @@ export default function Home() {
   };
 
   return (
-    <Stack spacing={3} padding={5}>
+    <Stack spacing={3} padding={isMobile ? 0 : 5}>
       <Box display={'flex'} justifyContent={'flex-end'}>
         <ThemeSwitch />
       </Box>
