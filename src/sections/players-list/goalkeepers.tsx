@@ -27,7 +27,7 @@ export default function Goalkeepers({ data, setOpenDeleteDialog, setSelectedPlay
 
     return(
         <Stack spacing={2}>
-            <Typography variant="h6">Porteros</Typography>
+            <Typography variant="subtitle2">Porteros</Typography>
             {data?.map(player => (
                 player.position === "POR" &&
                 <Stack 
@@ -64,7 +64,7 @@ export default function Goalkeepers({ data, setOpenDeleteDialog, setSelectedPlay
                                 {player.firstName} {player.lastName}
                             </Typography>
 
-                            <Typography variant="caption" color="text.secondary">
+                            <Typography variant="caption" color={theme.palette.text.secondary}>
                                 {player.isClubPlayer ? "Plantilla actual" : "En seguimiento"}
                             </Typography>
                         </Stack>
@@ -72,14 +72,14 @@ export default function Goalkeepers({ data, setOpenDeleteDialog, setSelectedPlay
 
                     <Stack direction={'row'} alignItems={'center'}>
                         <Box>
-                            <IconButton>
+                            <IconButton size="small">
                                 <Icon icon="mingcute:pencil-fill" />
                             </IconButton>
                         </Box>
 
                         <Box>
-                            <IconButton onClick={() => onDelete(player)}>
-                                <Icon icon="mingcute:delete-2-fill" color={theme.palette.error.light} />
+                            <IconButton size="small" onClick={() => onDelete(player)}>
+                                <Icon icon="mingcute:delete-2-fill" color={theme.palette.error.main} />
                             </IconButton>
                         </Box>
                     </Stack>

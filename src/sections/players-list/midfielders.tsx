@@ -27,7 +27,7 @@ export default function Midfielders({ data, setOpenDeleteDialog, setSelectedPlay
 
     return(
         <Stack spacing={2}>
-            <Typography variant="h6">Mediocampistas</Typography>
+            <Typography variant="subtitle2">Mediocampistas</Typography>
             {data?.map(player => (
                 (player.position === "MCI" ||
                 player.position === "MCD" ||
@@ -74,14 +74,14 @@ export default function Midfielders({ data, setOpenDeleteDialog, setSelectedPlay
 
                     <Stack direction={'row'} alignItems={'center'}>
                         <Box>
-                            <IconButton>
+                            <IconButton size="small">
                                 <Icon icon="mingcute:pencil-fill" />
                             </IconButton>
                         </Box>
 
                         <Box>
-                            <IconButton onClick={() => onDelete(player)}>
-                                <Icon icon="mingcute:delete-2-fill" color={theme.palette.error.light} />
+                            <IconButton onClick={() => onDelete(player)} size="small">
+                                <Icon icon="mingcute:delete-2-fill" color={theme.palette.error.main} />
                             </IconButton>
                         </Box>
                     </Stack>

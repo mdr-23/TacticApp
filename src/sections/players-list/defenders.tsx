@@ -27,7 +27,7 @@ export default function Defenders({ data, setOpenDeleteDialog, setSelectedPlayer
 
     return(
         <Stack spacing={2}>
-            <Typography variant="h6">Defensas</Typography>
+            <Typography variant="subtitle2">Defensas</Typography>
             {data?.map(player => (
                 (player.position === "DFD" ||
                 player.position === "DFI" ||
@@ -75,14 +75,14 @@ export default function Defenders({ data, setOpenDeleteDialog, setSelectedPlayer
 
                     <Stack direction={'row'} alignItems={'center'}>
                         <Box>
-                            <IconButton>
+                            <IconButton size="small">
                                 <Icon icon="mingcute:pencil-fill" />
                             </IconButton>
                         </Box>
 
                         <Box>
-                            <IconButton onClick={() => onDelete(player)}>
-                                <Icon icon="mingcute:delete-2-fill" color={theme.palette.error.light} />
+                            <IconButton size="small" onClick={() => onDelete(player)}>
+                                <Icon icon="mingcute:delete-2-fill" color={theme.palette.error.main} />
                             </IconButton>
                         </Box>
                     </Stack>

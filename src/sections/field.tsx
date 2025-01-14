@@ -106,10 +106,10 @@ function PlayerCircle({
                     sx={{
                         cursor: 'pointer',
                         textDecoration: 'none',
-                        color: !player.isClubPlayer ? 'common.white' : 'info.light',
+                        color: !player.isClubPlayer ? 'common.white' : 'info.main',
                         "&:hover": {
-                        textDecoration: 'none',
-                        color: !player.isClubPlayer ? 'grey.300' : 'info.main',
+                          textDecoration: 'none',
+                          color: !player.isClubPlayer ? 'grey.300' : 'info.dark',
                         },
                     }}
                 >

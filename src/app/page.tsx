@@ -1,10 +1,12 @@
 "use client";
 
+import ThemeSwitch from "@/components/theme/theme-switch";
 import { useResponsive } from "@/hooks/use-responsive";
 import { useAddPlayerMutation, useGetPlayersQuery } from "@/redux/playersApi";
 import Field from "@/sections/field";
 import PlayersList from "@/sections/players-list/players-list";
-import { Button, Checkbox, FormControlLabel, MenuItem, Stack, TextField, Typography } from "@mui/material";
+import { Icon } from "@iconify/react/dist/iconify.js";
+import { Box, Button, Checkbox, Fab, FormControlLabel, MenuItem, Stack, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 
 export default function Home() {
@@ -51,14 +53,17 @@ export default function Home() {
   };
 
   return (
-    <Stack spacing={3} justifyContent={'center'} alignItems={'center'}>
-      <Typography variant="h2">
+    <Stack spacing={3} padding={5}>
+      <Box display={'flex'} justifyContent={'flex-end'}>
+        <ThemeSwitch />
+      </Box>
+      <Typography variant="h3" textAlign={'center'}>
         TacticApp
       </Typography>
 
       <Stack direction={'column'} spacing={3}>
           <form onSubmit={handleSubmit}>
-            <Stack direction={isMobile ? 'column' : 'row'} spacing={2}>
+            <Stack direction={isMobile ? 'column' : 'row'} spacing={2} alignItems={'center'}>
               <TextField
                 label="Nombre"
                 value={firstName}
@@ -119,20 +124,23 @@ export default function Home() {
                 }
               />
 
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                fullWidth
-                disabled={isLoading}
-              >
-                {isLoading ? "Agregando..." : "Agregar"}
-              </Button>
+              <Box>
+                <Fab 
+                  aria-label="add"
+                  type="submit"
+                  color="primary"
+                  disabled={isLoading}
+                >
+                  {isLoading ? "Agregando..." : <Icon icon="mingcute:add-line" />}
+                </Fab>
+              </Box>
             </Stack>
           </form>
 
         {!isMobile &&
-        <Field />}
+        <Stack alignItems={'center'}>
+          <Field />
+        </Stack>}
 
         <PlayersList data={data} />
       </Stack>
