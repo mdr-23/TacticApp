@@ -1,5 +1,6 @@
 "use client";
 
+import { useResponsive } from "@/hooks/use-responsive";
 import { useAddPlayerMutation, useGetPlayersQuery } from "@/redux/playersApi";
 import Field from "@/sections/field";
 import PlayersList from "@/sections/players-list/players-list";
@@ -7,9 +8,9 @@ import { Button, Checkbox, FormControlLabel, MenuItem, Stack, TextField, Typogra
 import { useState } from "react";
 
 export default function Home() {
+  const isMobile = useResponsive("down", "sm")
   const { data } = useGetPlayersQuery();
   const [addPlayer, { isLoading }] = useAddPlayerMutation();
-  console.log(data)
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -57,7 +58,7 @@ export default function Home() {
 
       <Stack direction={'column'} spacing={3}>
           <form onSubmit={handleSubmit}>
-            <Stack direction={'row'} spacing={2}>
+            <Stack direction={isMobile ? 'column' : 'row'} spacing={2}>
               <TextField
                 label="Nombre"
                 value={firstName}
@@ -130,7 +131,8 @@ export default function Home() {
             </Stack>
           </form>
 
-        <Field />
+        {!isMobile &&
+        <Field />}
 
         <PlayersList data={data} />
       </Stack>
