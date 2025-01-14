@@ -2,6 +2,7 @@
 
 import { useAddPlayerMutation, useGetPlayersQuery } from "@/redux/playersApi";
 import Field from "@/sections/field";
+import PlayersList from "@/sections/players-list/players-list";
 import { Button, Checkbox, FormControlLabel, MenuItem, Stack, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 
@@ -50,7 +51,7 @@ export default function Home() {
 
   return (
     <Stack spacing={3} justifyContent={'center'} alignItems={'center'}>
-      <Typography variant="h2" color="text.primary">
+      <Typography variant="h2">
         TacticApp
       </Typography>
 
@@ -130,6 +131,8 @@ export default function Home() {
           </form>
 
         <Field />
+
+        <PlayersList data={data} />
       </Stack>
     </Stack>
   );

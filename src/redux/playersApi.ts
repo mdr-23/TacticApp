@@ -1,9 +1,9 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import { collection, addDoc, getDocs } from 'firebase/firestore';
+import { collection, addDoc, getDocs, deleteDoc, doc } from 'firebase/firestore'; // Importar deleteDoc y doc
 import { db } from '../../firebaseConfig';
 
 // Tipos de los datos
-interface Player {
+export interface Player {
   id?: string; // El ID se agrega automáticamente al leer datos de Firestore
   firstName: string;
   lastName: string;
@@ -27,8 +27,7 @@ export const playersApi = createApi({
           return { error: { message: error.message } };
         }
       },
-      // Invalidar la tag 'Players' al agregar un jugador
-      invalidatesTags: ['Players'],
+      invalidatesTags: ['Players'], // Invalidar la tag 'Players' al agregar un jugador
     }),
 
     // Endpoint para obtener todos los jugadores (GET)
@@ -45,10 +44,33 @@ export const playersApi = createApi({
           return { error: { message: error.message } };
         }
       },
-      // Asociar la tag 'Players' al endpoint getPlayers
-      providesTags: ['Players'],
+      providesTags: ['Players'], // Asociar la tag 'Players' al endpoint getPlayers
+    }),
+
+    // Endpoint para eliminar un jugador (DELETE)
+    deletePlayer: builder.mutation<void, string>({
+      //@ts-ignore
+      queryFn: async (playerId) => {
+        console.log("Eliminando jugador con ID:", playerId);
+    
+        try {
+          if (!playerId) {
+            return { error: { message: "ID no proporcionado" } };
+          }
+    
+          const playerRef = doc(db, 'players', playerId);
+          await deleteDoc(playerRef);
+    
+          console.log("Jugador eliminado correctamente");
+          return { data: null };
+        } catch (error: any) {
+          console.error("Error al eliminar jugador:", error);
+          return { error: { message: error.message } };
+        }
+      },
+      invalidatesTags: ['Players'],
     }),
   }),
 });
 
-export const { useAddPlayerMutation, useGetPlayersQuery } = playersApi;
+export const { useAddPlayerMutation, useGetPlayersQuery, useDeletePlayerMutation } = playersApi;
