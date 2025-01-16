@@ -1,11 +1,12 @@
 import { Box } from "@mui/material";
 import "./globals.css";
-import ClientProvider from "@/components/ClientProvider"; // Creamos un componente para el Provider
+import ClientProvider from "@/components/ClientProvider";
 import ThemeProvider from "@/components/theme/theme";
 import { CustomThemeProvider } from "@/components/theme/theme-context";
+import { AuthProvider } from "@/auth/context/auth-context";
 
 export const metadata = {
-  title: "TacticApp",
+  title: "Kadermeister",
   description: "App para gestión de jugadores",
 };
 
@@ -17,9 +18,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Box padding={5}>
+        <Box>
           <CustomThemeProvider>
-            <ClientProvider>{children}</ClientProvider>
+            <AuthProvider>
+              <ClientProvider>{children}</ClientProvider>
+            </AuthProvider>
           </CustomThemeProvider>
         </Box>
       </body>

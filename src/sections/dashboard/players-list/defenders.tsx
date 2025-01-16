@@ -1,6 +1,6 @@
 import { Player } from "@/redux/playersApi"
 import { Avatar, Box, IconButton, Stack, Typography, useTheme } from "@mui/material";
-import { PositionKey, positionColors } from "../utils/constants";
+import { PositionKey, positionColors } from "../../utils/constants";
 import { Icon } from "@iconify/react/dist/iconify.js";
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
     setSelectedPlayer: (value: Player) => void;
 }
 
-export default function Forwards({ data, setOpenDeleteDialog, setSelectedPlayer }: Props) {
+export default function Defenders({ data, setOpenDeleteDialog, setSelectedPlayer }: Props) {
     const theme = useTheme()
 
     const userClick = (player: Player) => {
@@ -27,11 +27,12 @@ export default function Forwards({ data, setOpenDeleteDialog, setSelectedPlayer 
 
     return(
         <Stack spacing={2}>
-            <Typography variant="subtitle2">Delanteros</Typography>
+            <Typography variant="subtitle2">Defensas</Typography>
             {data?.map(player => (
-                (player.position === "EI" ||
-                player.position === "ED" ||
-                player.position === "DC") &&
+                (player.position === "DFD" ||
+                player.position === "DFI" ||
+                player.position === "LD" ||
+                player.position === "LI") &&
                 <Stack 
                     key={player.id} 
                     direction={'row'} 

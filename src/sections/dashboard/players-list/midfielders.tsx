@@ -1,6 +1,6 @@
 import { Player } from "@/redux/playersApi"
 import { Avatar, Box, IconButton, Stack, Typography, useTheme } from "@mui/material";
-import { PositionKey, positionColors } from "../utils/constants";
+import { PositionKey, positionColors } from "../../utils/constants";
 import { Icon } from "@iconify/react/dist/iconify.js";
 
 type Props = {

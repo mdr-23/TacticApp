@@ -1,22 +1,22 @@
 "use client";
 
-import { useGetPlayersQuery } from "@/redux/playersApi";
 import { Box, Typography, Stack, Link } from "@mui/material";
 import { useState } from "react";
-import { PositionKey, positionColors } from "./utils/constants";
+import { PositionKey, positionColors } from "../../utils/constants";
+import { useGetPlayersQuery } from "@/redux/playersApi";
 
 const initialPositions: Record<PositionKey, { x: number; y: number }> = {
     POR: { x: 100, y: 333 },
     DFD: { x: 250, y: 420 },
-    DFI: { x: 250, y: 250 },
-    LD: { x: 250, y: 560 },
-    LI: { x: 250, y: 105 },
-    MCO: { x: 650, y: 333 },
-    MCI: { x: 400, y: 203 },
-    MCD: { x: 400, y: 463 },
-    ED: { x: 770, y: 560 },
-    EI: { x: 770, y: 105 },
-    DC: { x: 933, y: 333 },
+    DFI: { x: 250, y: 238 },
+    LD: { x: 250, y: 580 },
+    LI: { x: 250, y: 88 },
+    MCO: { x: 750, y: 333 },
+    MCI: { x: 500, y: 203 },
+    MCD: { x: 500, y: 463 },
+    ED: { x: 870, y: 560 },
+    EI: { x: 870, y: 105 },
+    DC: { x: 1033, y: 333 },
   };
 
 export default function Field() {
@@ -26,12 +26,11 @@ export default function Field() {
   return (
     <Stack spacing={4} padding={3}>
 
-      {/* Cancha */}
       <Box
         id="field"
         sx={{
             position: "relative",
-            width: 1122,
+            width: 1222,
             height: 732,
             backgroundImage: `url('/field-img.jpg')`,
             backgroundSize: "cover",

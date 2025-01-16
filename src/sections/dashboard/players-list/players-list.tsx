@@ -1,12 +1,12 @@
-import { Player } from "@/redux/playersApi"
 import { Box, Stack, Typography, useTheme } from "@mui/material";
 import Goalkeepers from "./goalkeepers";
 import { useState } from "react";
-import DeleteModal from "../delete-modal";
+import DeleteModal from "./modal/delete-modal";
 import Defenders from "./defenders";
 import Midfielders from "./midfielders";
 import Forwards from "./forwards";
 import { useResponsive } from "@/hooks/use-responsive";
+import { Player } from "@/redux/playersApi";
 
 type Props = {
     data: Player[] | undefined;

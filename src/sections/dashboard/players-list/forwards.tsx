@@ -1,6 +1,6 @@
 import { Player } from "@/redux/playersApi"
 import { Avatar, Box, IconButton, Stack, Typography, useTheme } from "@mui/material";
-import { PositionKey, positionColors } from "../utils/constants";
+import { PositionKey, positionColors } from "../../utils/constants";
 import { Icon } from "@iconify/react/dist/iconify.js";
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
     setSelectedPlayer: (value: Player) => void;
 }
 
-export default function Goalkeepers({ data, setOpenDeleteDialog, setSelectedPlayer }: Props) {
+export default function Forwards({ data, setOpenDeleteDialog, setSelectedPlayer }: Props) {
     const theme = useTheme()
 
     const userClick = (player: Player) => {
@@ -27,9 +27,11 @@ export default function Goalkeepers({ data, setOpenDeleteDialog, setSelectedPlay
 
     return(
         <Stack spacing={2}>
-            <Typography variant="subtitle2">Porteros</Typography>
+            <Typography variant="subtitle2">Delanteros</Typography>
             {data?.map(player => (
-                player.position === "POR" &&
+                (player.position === "EI" ||
+                player.position === "ED" ||
+                player.position === "DC") &&
                 <Stack 
                     key={player.id} 
                     direction={'row'} 
@@ -64,7 +66,7 @@ export default function Goalkeepers({ data, setOpenDeleteDialog, setSelectedPlay
                                 {player.firstName} {player.lastName}
                             </Typography>
 
-                            <Typography variant="caption" color={theme.palette.text.secondary}>
+                            <Typography variant="caption" color="text.secondary">
                                 {player.isClubPlayer ? "Plantilla actual" : "En seguimiento"}
                             </Typography>
                         </Stack>
