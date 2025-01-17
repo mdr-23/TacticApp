@@ -12,6 +12,7 @@ import { typography } from './typography';
 // Opcional: Importa otras configuraciones como shadows o customShadows si las necesitas
 import { shadows } from './shadows';
 import { customShadows } from './custom-shadows';
+import { componentsOverrides } from './overrides';
 
 type Props = {
   children: React.ReactNode;
@@ -39,8 +40,7 @@ export default function ThemeProvider({ children, mode }: Props) {
   // Crear el tema
   const theme = createTheme(memoizedValue as ThemeOptions);
 
-  // Si necesitas sobrescribir componentes globales
-  theme.components = merge({}, theme.components);
+  theme.components = merge(componentsOverrides(theme), theme.components);
 
   return (
     <MuiThemeProvider theme={theme}>

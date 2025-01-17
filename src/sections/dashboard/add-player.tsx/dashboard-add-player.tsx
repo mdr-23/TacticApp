@@ -4,7 +4,6 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 import { Box, Button, Checkbox, Collapse, Fab, FormControlLabel, MenuItem, Stack, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 import { useAddPlayerMutation, useGetPlayersQuery } from "@/redux/playersApi";
-import ThemeSwitch from "@/components/theme/theme-switch";
 import { useResponsive } from "@/hooks/use-responsive";
 import CustomLabeledBox from "@/components/box-label/custom-box-label";
 
@@ -62,55 +61,60 @@ export default function DashboardAddPlayer() {
   const renderForm = (
     <CustomLabeledBox label="Añadir jugador">
         <form onSubmit={handleSubmit}>
-            <Stack direction={isMobile ? 'column' : 'row'} spacing={2} alignItems={'center'}>
-            <TextField
-                label="Nombre"
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
-                fullWidth
-                required
-            />
-            <TextField
-                label="Apellido"
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
-                fullWidth
-                required
-            />
-            <TextField
-                select
-                label="Posición"
-                value={position}
-                onChange={(e) => setPosition(e.target.value)}
-                fullWidth
-                required
-            >
-                {/* Opciones de las posiciones */}
-                {[
-                "POR", // Portero
-                "DFD", // Defensa Derecho
-                "DFI", // Defensa Izquierdo
-                "LD",  // Lateral Derecho
-                "LI",  // Lateral Izquierdo
-                "MCI", // Mediocentro Izquierdo
-                "MCD", // Mediocentro Derecho
-                "MCO", // Mediocentro Ofensivo
-                "ED",  // Extremo Derecho
-                "EI",  // Extremo Izquierdo
-                "DC",  // Delantero Centro
-                ].map((positionOption) => (
-                <MenuItem key={positionOption} value={positionOption}>
-                    {positionOption}
-                </MenuItem>
-                ))}
-            </TextField>
-            <TextField
-                label="Bessocer"
-                value={besoccerLink}
-                onChange={(e) => setBesoccerLink(e.target.value)}
-                fullWidth
-                required
-            />
+            <Stack direction={isMobile ? 'column' : 'row'} spacing={3} alignItems={'center'}>
+              <Stack spacing={3} flex={1}>
+                <TextField
+                  label="Nombre"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  fullWidth
+                  required
+                />
+                <TextField
+                    label="Apellido"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                    fullWidth
+                    required
+                />
+              </Stack>
+
+              <Stack spacing={3} flex={1}>
+                <TextField
+                  select
+                  label="Posición"
+                  value={position}
+                  onChange={(e) => setPosition(e.target.value)}
+                  fullWidth
+                  required
+                >
+                    {/* Opciones de las posiciones */}
+                    {[
+                    "POR", // Portero
+                    "DFD", // Defensa Derecho
+                    "DFI", // Defensa Izquierdo
+                    "LD",  // Lateral Derecho
+                    "LI",  // Lateral Izquierdo
+                    "MCI", // Mediocentro Izquierdo
+                    "MCD", // Mediocentro Derecho
+                    "MCO", // Mediocentro Ofensivo
+                    "ED",  // Extremo Derecho
+                    "EI",  // Extremo Izquierdo
+                    "DC",  // Delantero Centro
+                    ].map((positionOption) => (
+                    <MenuItem key={positionOption} value={positionOption}>
+                        {positionOption}
+                    </MenuItem>
+                    ))}
+                </TextField>
+                <TextField
+                    label="Bessocer"
+                    value={besoccerLink}
+                    onChange={(e) => setBesoccerLink(e.target.value)}
+                    fullWidth
+                    required
+                />
+              </Stack>
 
             <FormControlLabel 
                 label={'Plantilla actual'}

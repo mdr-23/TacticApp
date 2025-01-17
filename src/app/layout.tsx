@@ -1,8 +1,8 @@
 import { Box } from "@mui/material";
 import "./globals.css";
 import ClientProvider from "@/components/ClientProvider";
-import ThemeProvider from "@/components/theme/theme";
-import { CustomThemeProvider } from "@/components/theme/theme-context";
+import ThemeProvider from "@/theme/theme";
+import { CustomThemeProvider } from "@/theme/theme-context";
 import { AuthProvider } from "@/auth/context/auth-context";
 
 export const metadata = {

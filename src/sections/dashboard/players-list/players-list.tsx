@@ -7,6 +7,7 @@ import Midfielders from "./midfielders";
 import Forwards from "./forwards";
 import { useResponsive } from "@/hooks/use-responsive";
 import { Player } from "@/redux/playersApi";
+import UpdateModal from "./modal/update-modal";
 
 type Props = {
     data: Player[] | undefined;
@@ -16,6 +17,7 @@ export default function PlayersList({ data }: Props) {
     const isMobile = useResponsive("down", "sm")
     const theme = useTheme()
     const [openDeleteDialog, setOpenDeleteDialog] = useState(false)
+    const [openEditDialog, setOpenEditDialog] = useState(false)
     const [selectedPlayer, setSelectedPlayer] = useState<Player | undefined>()
 
     return(
@@ -39,6 +41,7 @@ export default function PlayersList({ data }: Props) {
                         data={data} 
                         setOpenDeleteDialog={setOpenDeleteDialog}
                         setSelectedPlayer={setSelectedPlayer}
+                        setOpenEditDialog={setOpenEditDialog}
                     />
                 </Box>
                 <Box sx={{ flex: 1 }}>
@@ -46,6 +49,7 @@ export default function PlayersList({ data }: Props) {
                         data={data} 
                         setOpenDeleteDialog={setOpenDeleteDialog}
                         setSelectedPlayer={setSelectedPlayer}
+                        setOpenEditDialog={setOpenEditDialog}
                     />
                 </Box>
                 <Box sx={{ flex: 1 }}>
@@ -53,6 +57,7 @@ export default function PlayersList({ data }: Props) {
                         data={data} 
                         setOpenDeleteDialog={setOpenDeleteDialog}
                         setSelectedPlayer={setSelectedPlayer}
+                        setOpenEditDialog={setOpenEditDialog}
                     />
                 </Box>
                 <Box sx={{ flex: 1 }}>
@@ -60,6 +65,7 @@ export default function PlayersList({ data }: Props) {
                         data={data} 
                         setOpenDeleteDialog={setOpenDeleteDialog}
                         setSelectedPlayer={setSelectedPlayer}
+                        setOpenEditDialog={setOpenEditDialog}
                     />
                 </Box>
 
@@ -69,7 +75,14 @@ export default function PlayersList({ data }: Props) {
                         openDeleteDialog={openDeleteDialog}
                         selectedPlayer={selectedPlayer}
                     />
-                }            
+                }
+                {openEditDialog &&
+                    <UpdateModal
+                        setOpenEditDialog={setOpenEditDialog}
+                        openEditDialog={openEditDialog}
+                        selectedPlayer={selectedPlayer}
+                    />
+                }                 
             </Stack>
         </Stack>
     )

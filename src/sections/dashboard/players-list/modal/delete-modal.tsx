@@ -1,5 +1,5 @@
+import Iconify from "@/components/iconify";
 import { Player, useDeletePlayerMutation } from "@/redux/playersApi";
-import { Icon } from "@iconify/react/dist/iconify.js";
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, Stack, Typography, useTheme } from "@mui/material";
 
 type Props = {
@@ -43,7 +43,7 @@ export default function DeleteModal({
             >
                 Eliminar jugador
                 <IconButton onClick={() => setOpenDeleteDialog(false)}>
-                    <Icon icon="mingcute:close-line" />
+                    <Iconify icon="mingcute:close-line" />
                 </IconButton>
             </DialogTitle>
             <DialogContent>
@@ -58,7 +58,7 @@ export default function DeleteModal({
                 <Button variant="outlined" onClick={() => setOpenDeleteDialog(false)} sx={{ color: theme.palette.common.black, borderColor: theme.palette.common.black }}>
                     Cancelar
                 </Button>
-                <Button onClick={() => handleDelete(selectedPlayer?.id!)} variant="contained" sx={{ bgcolor: theme.palette.common.black }}>
+                <Button onClick={() => handleDelete(selectedPlayer?.id!)} variant="contained" color="error">
                     Eliminar
                 </Button>
             </DialogActions>

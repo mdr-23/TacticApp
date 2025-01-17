@@ -1,10 +1,9 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import { collection, addDoc, getDocs, deleteDoc, doc } from 'firebase/firestore'; // Importar deleteDoc y doc
+import { collection, addDoc, getDocs, deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import { db } from '../../firebaseConfig';
 
-// Tipos de los datos
 export interface Player {
-  id?: string; // El ID se agrega automáticamente al leer datos de Firestore
+  id?: string; 
   firstName: string;
   lastName: string;
   position: string;
@@ -15,9 +14,9 @@ export interface Player {
 export const playersApi = createApi({
   reducerPath: 'playersApi',
   baseQuery: async () => ({ data: {} }),
-  tagTypes: ['Players'], // Definir las tags disponibles
+  tagTypes: ['Players'],
   endpoints: (builder) => ({
-    // Endpoint para agregar un jugador (POST)
+    // POST
     addPlayer: builder.mutation<{ id: string } & Player, Player>({
       queryFn: async (player) => {
         try {
@@ -27,10 +26,10 @@ export const playersApi = createApi({
           return { error: { message: error.message } };
         }
       },
-      invalidatesTags: ['Players'], // Invalidar la tag 'Players' al agregar un jugador
+      invalidatesTags: ['Players'],
     }),
 
-    // Endpoint para obtener todos los jugadores (GET)
+    // GET
     getPlayers: builder.query<Player[], void>({
       async queryFn() {
         try {
@@ -44,10 +43,10 @@ export const playersApi = createApi({
           return { error: { message: error.message } };
         }
       },
-      providesTags: ['Players'], // Asociar la tag 'Players' al endpoint getPlayers
+      providesTags: ['Players'],
     }),
 
-    // Endpoint para eliminar un jugador (DELETE)
+    // DELETE
     deletePlayer: builder.mutation<void, string>({
       //@ts-ignore
       queryFn: async (playerId) => {
@@ -70,7 +69,31 @@ export const playersApi = createApi({
       },
       invalidatesTags: ['Players'],
     }),
+
+    // UPDATE
+    updatePlayer: builder.mutation<Player, { playerId: string | undefined; playerData: Partial<Player> }>({
+      //@ts-ignore
+      queryFn: async ({ playerId, playerData }) => {
+        console.log("Editando jugador con ID:", playerId);
+    
+        try {
+          if (!playerId) {
+            return { error: { message: "ID no proporcionado" } };
+          }
+    
+          const playerRef = doc(db, 'players', playerId);
+          await updateDoc(playerRef, playerData); // Actualizar los datos del jugador
+    
+          console.log("Jugador actualizado correctamente");
+          return { data: { id: playerId, ...playerData } };
+        } catch (error: any) {
+          console.error("Error al editar jugador:", error);
+          return { error: { message: error.message } };
+        }
+      },
+      invalidatesTags: ['Players'],
+    }),
   }),
 });
 
-export const { useAddPlayerMutation, useGetPlayersQuery, useDeletePlayerMutation } = playersApi;
+export const { useAddPlayerMutation, useGetPlayersQuery, useDeletePlayerMutation, useUpdatePlayerMutation } = playersApi;

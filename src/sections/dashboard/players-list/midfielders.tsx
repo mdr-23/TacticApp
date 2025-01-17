@@ -2,14 +2,16 @@ import { Player } from "@/redux/playersApi"
 import { Avatar, Box, IconButton, Stack, Typography, useTheme } from "@mui/material";
 import { PositionKey, positionColors } from "../../utils/constants";
 import { Icon } from "@iconify/react/dist/iconify.js";
+import Iconify from "@/components/iconify";
 
 type Props = {
     data: Player[] | undefined;
     setOpenDeleteDialog: (value: boolean) => void;
     setSelectedPlayer: (value: Player) => void;
+    setOpenEditDialog: (value: boolean) => void;
 }
 
-export default function Midfielders({ data, setOpenDeleteDialog, setSelectedPlayer }: Props) {
+export default function Midfielders({ data, setOpenDeleteDialog, setSelectedPlayer, setOpenEditDialog }: Props) {
     const theme = useTheme()
 
     const userClick = (player: Player) => {
@@ -23,6 +25,11 @@ export default function Midfielders({ data, setOpenDeleteDialog, setSelectedPlay
     const onDelete = (player: Player) => {
         setSelectedPlayer(player);
         setOpenDeleteDialog(true);
+    }
+
+    const onEdit = (player: Player) => {
+        setSelectedPlayer(player);
+        setOpenEditDialog(true);
     }
 
     return(
@@ -74,14 +81,14 @@ export default function Midfielders({ data, setOpenDeleteDialog, setSelectedPlay
 
                     <Stack direction={'row'} alignItems={'center'}>
                         <Box>
-                            <IconButton size="small">
-                                <Icon icon="mingcute:pencil-fill" />
+                            <IconButton size="small" onClick={() => onEdit(player)}>
+                                <Iconify icon="mingcute:pencil-fill" />
                             </IconButton>
                         </Box>
 
                         <Box>
                             <IconButton onClick={() => onDelete(player)} size="small">
-                                <Icon icon="mingcute:delete-2-fill" color={theme.palette.error.main} />
+                                <Iconify icon="mingcute:delete-2-fill" color={theme.palette.error.main} />
                             </IconButton>
                         </Box>
                     </Stack>

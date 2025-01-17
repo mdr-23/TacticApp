@@ -1,5 +1,5 @@
-import { useThemeContext } from "@/components/theme/theme-context";
-import ThemeSwitch from "@/components/theme/theme-switch";
+import { useThemeContext } from "@/theme/theme-context";
+import ThemeSwitch from "@/theme/theme-switch";
 import { useResponsive } from "@/hooks/use-responsive";
 import { Box, Stack, Typography, useTheme } from "@mui/material";
 
