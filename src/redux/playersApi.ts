@@ -6,7 +6,8 @@ export interface Player {
   id?: string; 
   firstName: string;
   lastName: string;
-  position: string;
+  firstPosition: string;
+  secondPosition: string;
   besoccer: string;
   isClubPlayer: boolean;
 }

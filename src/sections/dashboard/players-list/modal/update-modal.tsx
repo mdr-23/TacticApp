@@ -23,6 +23,7 @@ export default function UpdateModal({
     const [firstName, setFirstName] = useState(selectedPlayer?.firstName);
     const [lastName, setLastName] = useState(selectedPlayer?.lastName);
     const [position, setPosition] = useState(selectedPlayer?.position);
+    const [secondPosition, setSecondPosition] = useState(selectedPlayer?.secondPosition);
     const [besoccerLink, setBesoccerLink] = useState(selectedPlayer?.besoccer);
     const [isClubPlayer, setIsClubPlayer] = useState(selectedPlayer?.isClubPlayer)
 
@@ -77,31 +78,58 @@ export default function UpdateModal({
                     />
 
                     <TextField
-                    select
-                    label="Posición"
-                    value={position}
-                    onChange={(e) => setPosition(e.target.value)}
-                    fullWidth
-                    required
+                        select
+                        label="Posición 433"
+                        value={position}
+                        onChange={(e) => setPosition(e.target.value)}
+                        fullWidth
+                        required
+                        >
+                            {[
+                            "POR", // Portero
+                            "DFD", // Defensa Derecho
+                            "DFI", // Defensa Izquierdo
+                            "LD",  // Lateral Derecho
+                            "LI",  // Lateral Izquierdo
+                            "MCI", // Mediocentro Izquierdo
+                            "MCD", // Mediocentro Derecho
+                            "MCO", // Mediocentro Ofensivo
+                            "ED",  // Extremo Derecho
+                            "EI",  // Extremo Izquierdo
+                            "DC",  // Delantero Centro
+                            ].map((positionOption) => (
+                            <MenuItem key={positionOption} value={positionOption}>
+                                {positionOption}
+                            </MenuItem>
+                            ))}
+                        </TextField>
+                        <TextField
+                        select
+                        label="Posición 352"
+                        value={secondPosition}
+                        onChange={(e) => setSecondPosition(e.target.value)}
+                        fullWidth
+                        disabled={["POR", "MCI", "MCD", "MCO"].includes(position ? position : "0")}
                     >
-                        {[
-                        "POR", // Portero
-                        "DFD", // Defensa Derecho
-                        "DFI", // Defensa Izquierdo
-                        "LD",  // Lateral Derecho
-                        "LI",  // Lateral Izquierdo
-                        "MCI", // Mediocentro Izquierdo
-                        "MCD", // Mediocentro Derecho
-                        "MCO", // Mediocentro Ofensivo
-                        "ED",  // Extremo Derecho
-                        "EI",  // Extremo Izquierdo
-                        "DC",  // Delantero Centro
-                        ].map((positionOption) => (
-                        <MenuItem key={positionOption} value={positionOption}>
-                            {positionOption}
-                        </MenuItem>
-                        ))}
-                    </TextField>
+                      {/* Opciones de las posiciones */}
+                      {[
+                      "POR",
+                      "DFD", 
+                      "DFC",
+                      "DFI",
+                      "MCI", 
+                      "MCD", 
+                      "MD", 
+                      "MI", 
+                      "MCO", 
+                      "DLD",
+                      "DLI",
+                      ].map((positionOption) => (
+                      <MenuItem key={positionOption} value={positionOption}>
+                          {positionOption}
+                      </MenuItem>
+                      ))}
+                  </TextField>
                     <TextField
                         label="Bessocer"
                         value={besoccerLink}

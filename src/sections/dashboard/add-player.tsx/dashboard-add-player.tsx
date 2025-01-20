@@ -16,7 +16,8 @@ export default function DashboardAddPlayer() {
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [position, setPosition] = useState("");
+  const [position, settPosition] = useState("");
+  const [secondPosition, setSecondPosition] = useState("");
   const [besoccerLink, setBesoccerLink] = useState("");
   const [isClubPlayer, setIsClubPlayer] = useState(false)
 
@@ -45,12 +46,13 @@ export default function DashboardAddPlayer() {
         firstName,
         lastName,
         position,
+        secondPosition,
         besoccer: besoccerLink,
         isClubPlayer
       });
       setFirstName("");
       setLastName("");
-      setPosition("");
+      settPosition("");
       setBesoccerLink("");
       setIsClubPlayer(false);
     } catch (error) {
@@ -62,70 +64,104 @@ export default function DashboardAddPlayer() {
     <CustomLabeledBox label="Añadir jugador">
         <form onSubmit={handleSubmit}>
             <Stack direction={isMobile ? 'column' : 'row'} spacing={3} alignItems={'center'}>
-              <Stack spacing={3} flex={1}>
-                <TextField
-                  label="Nombre"
-                  value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
-                  fullWidth
-                  required
-                />
-                <TextField
-                    label="Apellido"
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
+              <Stack flex={1} spacing={3}>
+                <Stack spacing={3} direction={isMobile ? 'column' : 'row'}>
+                  <TextField
+                    label="Nombre"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
                     fullWidth
                     required
-                />
-              </Stack>
+                  />
+                  <TextField
+                      label="Apellido"
+                      value={lastName}
+                      onChange={(e) => setLastName(e.target.value)}
+                      fullWidth
+                      required
+                  />
+                </Stack>
 
-              <Stack spacing={3} flex={1}>
-                <TextField
-                  select
-                  label="Posición"
-                  value={position}
-                  onChange={(e) => setPosition(e.target.value)}
-                  fullWidth
-                  required
-                >
-                    {/* Opciones de las posiciones */}
-                    {[
-                    "POR", // Portero
-                    "DFD", // Defensa Derecho
-                    "DFI", // Defensa Izquierdo
-                    "LD",  // Lateral Derecho
-                    "LI",  // Lateral Izquierdo
-                    "MCI", // Mediocentro Izquierdo
-                    "MCD", // Mediocentro Derecho
-                    "MCO", // Mediocentro Ofensivo
-                    "ED",  // Extremo Derecho
-                    "EI",  // Extremo Izquierdo
-                    "DC",  // Delantero Centro
-                    ].map((positionOption) => (
-                    <MenuItem key={positionOption} value={positionOption}>
-                        {positionOption}
-                    </MenuItem>
-                    ))}
-                </TextField>
-                <TextField
-                    label="Bessocer"
-                    value={besoccerLink}
-                    onChange={(e) => setBesoccerLink(e.target.value)}
+                <Stack spacing={3} direction={isMobile ? 'column' : 'row'}>
+                  <TextField
+                    select
+                    label="Posición 433"
+                    value={position}
+                    onChange={(e) => settPosition(e.target.value)}
                     fullWidth
                     required
-                />
-              </Stack>
+                  >
+                      {/* Opciones de las posiciones */}
+                      {[
+                      "POR", // Portero
+                      "DFD", // Defensa Derecho
+                      "DFI", // Defensa Izquierdo
+                      "LD",  // Lateral Derecho
+                      "LI",  // Lateral Izquierdo
+                      "MCI", // Mediocentro Izquierdo
+                      "MCD", // Mediocentro Derecho
+                      "MCO", // Mediocentro Ofensivo
+                      "ED",  // Extremo Derecho
+                      "EI",  // Extremo Izquierdo
+                      "DC",  // Delantero Centro
+                      ].map((positionOption) => (
+                      <MenuItem key={positionOption} value={positionOption}>
+                          {positionOption}
+                      </MenuItem>
+                      ))}
+                  </TextField>
 
-            <FormControlLabel 
-                label={'Plantilla actual'}
-                control={
-                <Checkbox
-                    checked={isClubPlayer}
-                    onChange={handleChangeIsClubPlayerCheckbox}
-                    inputProps={{ 'aria-label': 'controlled' }}
-                />
-                }
-            />
+                  <TextField
+                    select
+                    label="Posición 352"
+                    value={secondPosition}
+                    onChange={(e) => setSecondPosition(e.target.value)}
+                    fullWidth
+                    disabled={["POR", "MCI", "MCD", "MCO"].includes(position)}
+                  >
+                      {/* Opciones de las posiciones */}
+                      {[
+                      "POR",
+                      "DFD", 
+                      "DFC",
+                      "DFI",
+                      "MCI", 
+                      "MCD", 
+                      "MD", 
+                      "MI", 
+                      "MCO", 
+                      "DLD",
+                      "DLI",
+                      ].map((positionOption) => (
+                      <MenuItem key={positionOption} value={positionOption}>
+                          {positionOption}
+                      </MenuItem>
+                      ))}
+                  </TextField>
+                </Stack>
+                <Stack spacing={3} direction={isMobile ? 'column' : 'row'}>
+                  <TextField
+                      label="Bessocer"
+                      value={besoccerLink}
+                      onChange={(e) => setBesoccerLink(e.target.value)}
+                      fullWidth
+                      required
+                      sx={{ flex: 1 }}
+                  />
+
+                  <FormControlLabel 
+                    label={'Plantilla actual'}
+                    sx={{ flex: 1 }}
+                    control={
+                    <Checkbox
+                        checked={isClubPlayer}
+                        onChange={handleChangeIsClubPlayerCheckbox}
+                        inputProps={{ 'aria-label': 'controlled' }}
+                    />
+                    }
+                  />
+                </Stack>
+              </Stack>
 
             <Box>
                 <Fab 

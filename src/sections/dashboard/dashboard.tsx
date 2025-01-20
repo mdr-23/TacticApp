@@ -1,16 +1,32 @@
 "use client";
 
-import { Stack, Typography, useTheme } from "@mui/material";
-import Field from "./field/field";
+import { Box, Stack, Tab, Tabs, Typography, useTheme } from "@mui/material";
 import PlayersList from "./players-list/players-list";
 import { useGetPlayersQuery } from "@/redux/playersApi";
 import { useResponsive } from "@/hooks/use-responsive";
 import DashboardAddPlayer from "./add-player.tsx/dashboard-add-player";
+import Tacitc433 from "./field/tactic433";
+import { useState } from "react";
+import Tacitc352 from "./field/tactic352";
 
 export default function Dashboard() {
   const isMobile = useResponsive("down", "sm")
   const theme = useTheme()
   const { data } = useGetPlayersQuery();
+
+  const [value, setValue] = useState('433');
+
+  const tabs = [
+    { id: 1, value: '433' },
+    { id: 2, value: '352' },
+  ];
+
+  const handleTabChange = (event: React.SyntheticEvent, newValue: string) => {
+    const foundTab = tabs.find((tab) => tab.value === newValue);
+    if (foundTab) {
+      setValue(foundTab.value);
+    }
+  };
 
   return (
     <Stack spacing={3} padding={isMobile ? 0 : 5}>
@@ -40,9 +56,43 @@ export default function Dashboard() {
 
             <DashboardAddPlayer />
 
-          {!isMobile &&
+            <Tabs
+              onChange={handleTabChange}
+              value={value}
+              aria-label="Tabs"
+              sx={{
+                position: 'sticky',
+                top: 0,
+                backgroundColor: '#fff',
+                zIndex: 2,
+              }}
+            >
+              {tabs.map((item) => (
+                <Tab
+                  key={item.id}
+                  value={item.value}
+                  label={
+                    <Box sx={{ display: 'flex' }} gap={1}>
+                      <Typography
+                        color={value === item.value ? 'text.primary' : 'text.secondary'}
+                        variant="subtitle2"
+                      >
+                        Esquema {item.value}
+                      </Typography>
+                    </Box>
+                  }
+                />
+              ))}
+            </Tabs>
+
+          {!isMobile && value === '433' &&
           <Stack alignItems={'center'}>
-            <Field />
+            <Tacitc433 />
+          </Stack>}
+
+          {!isMobile && value === '352' &&
+          <Stack alignItems={'center'}>
+            <Tacitc352 />
           </Stack>}
         </Stack>
 

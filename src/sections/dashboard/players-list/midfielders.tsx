@@ -56,7 +56,7 @@ export default function Midfielders({ data, setOpenDeleteDialog, setSelectedPlay
                       }}
                 >
                     <Stack direction={'row'} alignItems={'center'} spacing={1} onClick={() => userClick(player)}>
-                        <Avatar sx={{ bgcolor: positionColors[player.position as PositionKey], fontSize: '12px' }}>
+                        <Avatar sx={{ bgcolor: "#2036b0", fontSize: '12px' }}>
                             {player.position}
                         </Avatar>
 
