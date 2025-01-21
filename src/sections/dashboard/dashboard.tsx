@@ -63,7 +63,6 @@ export default function Dashboard() {
               sx={{
                 position: 'sticky',
                 top: 0,
-                backgroundColor: '#fff',
                 zIndex: 2,
               }}
             >
