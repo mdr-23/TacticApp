@@ -1,4 +1,4 @@
-export type PositionKey = "POR" | "DFD" | "DFI" | "LD" | "LI" | "MCO" | "MCI" | "MCD" | "ED" | "EI" | "DC";
+export type PositionKey = "POR" | "DFD" | "DFI" | "LD" | "LI" | "PIV" | "MCI" | "MCD" | "ED" | "EI" | "DC";
 export type PositionKey352 = "POR" | "DFD" | "DFI" | "DFC" | "MD" | "MCO" | "MCI" | "MCD" | "MI" | "DLD" | "DLI";
 
 export const positionColors = (tactic: "433" | "352"): Partial<Record<PositionKey | PositionKey352, string>> => {
@@ -14,7 +14,7 @@ export const positionColors = (tactic: "433" | "352"): Partial<Record<PositionKe
       ED: "#2036b0",
       EI: "#2036b0",
       DC: "#2036b0",
-      MCO: "#2036b0",
+      PIV: "#2036b0",
     };
   } else if (tactic === "352") {
     return {

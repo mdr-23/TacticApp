@@ -109,7 +109,7 @@ export default function UpdateModal({
                         value={secondPosition}
                         onChange={(e) => setSecondPosition(e.target.value)}
                         fullWidth
-                        disabled={["POR", "MCI", "MCD", "MCO"].includes(position ? position : "0")}
+                        disabled={["POR"].includes(position ? position : "0")}
                     >
                       {/* Opciones de las posiciones */}
                       {[
