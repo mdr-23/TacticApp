@@ -38,7 +38,8 @@ export default function Midfielders({ data, setOpenDeleteDialog, setSelectedPlay
             {data?.map(player => (
                 (player.position === "MCI" ||
                 player.position === "MCD" ||
-                player.position === "MCO") &&
+                player.position === "MCO" ||
+                player.position === "PIV") &&
                 <Stack 
                     key={player.id} 
                     direction={'row'} 
