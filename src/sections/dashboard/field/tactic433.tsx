@@ -5,23 +5,25 @@ import { useState } from "react";
 import { PositionKey, positionColors } from "../../utils/constants";
 import { useGetPlayersQuery } from "@/redux/playersApi";
 import FieldPlayers from "./field-players";
+import { useResponsive } from "@/hooks/use-responsive";
 
 const initialPositions: Record<PositionKey, { x: number; y: number }> = {
-    POR: { x: 100, y: 333 },
-    DFD: { x: 250, y: 420 },
-    DFI: { x: 250, y: 238 },
-    LD: { x: 250, y: 580 },
-    LI: { x: 250, y: 88 },
-    PIV: { x: 450, y: 333 },
-    MCI: { x: 650, y: 203 },
-    MCD: { x: 650, y: 463 },
-    ED: { x: 870, y: 560 },
-    EI: { x: 870, y: 105 },
-    DC: { x: 1033, y: 333 },
+    POR: { x: 158, y: 400 },
+    DFD: { x: 350, y: 495 },
+    DFI: { x: 350, y: 305 },
+    LD: { x: 380, y: 670 },
+    LI: { x: 380, y: 105 },
+    PIV: { x: 580, y: 400 },
+    MCI: { x: 800, y: 203 },
+    MCD: { x: 800, y: 560 },
+    ED: { x: 1040, y: 640 },
+    EI: { x: 1040, y: 105 },
+    DC: { x: 1168, y: 400 },
   };
 
 export default function Tacitc433() {
   const { data: players } = useGetPlayersQuery();
+  const isTablet = useResponsive("down", "xl")
   const [positions] = useState(initialPositions);
 
   const tactic = "433";
@@ -33,8 +35,8 @@ export default function Tacitc433() {
         id="field"
         sx={{
             position: "relative",
-            width: 1222,
-            height: 732,
+            width: !isTablet ? 1722 : 1450,
+            height: 852,
             backgroundImage: `url('/field-img.jpg')`,
             backgroundSize: "cover",
             backgroundPosition: "center",

@@ -32,34 +32,46 @@ export default function FieldPlayers({
           textAlign: "center",
         }}
       >
-        {/* Nombre de la posición */}
         <Typography variant="body1">{position}</Typography>
   
-        {/* Lista de jugadores */}
-        <Box sx={{ position: "absolute", top: 70, textAlign: "center", bgcolor: "#000000c7", width: '100px', borderRadius: 2, paddingY: 1 }}>
-          {players.map((player) => (
-              <Stack
+        <Box
+          sx={{
+            position: "absolute",
+            top: 70,
+            textAlign: "center",
+            bgcolor: "#000000c7",
+            width: players.length > 4 ? '200px' : '100px',
+            borderRadius: 2,
+            paddingY: 1,
+            display: "flex",
+            flexDirection: players.length > 4 ? "row" : "column",
+            justifyContent: "space-around",
+          }}
+        >
+          {[players.slice(0, 4), players.slice(4)].map((column, columnIndex) => (
+            <Stack key={columnIndex}>
+              {column.map((player) => (
+                <Link
                   key={player.id}
-              >
-                  <Link
-                      href={player.besoccer}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      sx={{
-                          cursor: 'pointer',
-                          textDecoration: 'none',
-                          color: !player.isClubPlayer ? 'common.white' : 'info.main',
-                          "&:hover": {
-                            textDecoration: 'none',
-                            color: !player.isClubPlayer ? 'grey.300' : 'info.dark',
-                          },
-                      }}
-                  >
-                      <Typography variant="body2">
-                          {`${player.firstName.charAt(0)}. ${player.lastName}`}
-                      </Typography>
-                  </Link>
-              </Stack>
+                  href={player.besoccer}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  sx={{
+                    cursor: 'pointer',
+                    textDecoration: 'none',
+                    color: !player.isClubPlayer ? 'common.white' : 'info.main',
+                    "&:hover": {
+                      textDecoration: 'none',
+                      color: !player.isClubPlayer ? 'grey.300' : 'info.dark',
+                    },
+                  }}
+                >
+                  <Typography variant="body2">
+                    {`${player.firstName.charAt(0)}. ${player.lastName}`}
+                  </Typography>
+                </Link>
+              ))}
+            </Stack>
           ))}
         </Box>
       </Box>
